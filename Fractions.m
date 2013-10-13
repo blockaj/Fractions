@@ -168,4 +168,57 @@
     
     returningFraction = [Fractions newFractionWithNumerator: fractionNum andDenominator: fractionDenom];
 }
+
++(NSNumber *)getGCFOf: (NSNumber *)frstNumber and: (NSNumber *)scndNumber {
+    float t, r;
+    
+    //Convert input to floats
+    float frstNumberFloat = frstNumber.floatValue;
+    float scndNumberFloat = scndNumber.floatValue;
+    
+    if (frstNumberFloat < scndNumberFloat){
+        t = frstNumberFloat;
+        frstNumberFloat = scndNumberFloat;
+        scndNumberFloat = t;
+    }
+    
+    r = fmodf(frstNumberFloat, scndNumberFloat);
+    
+    if (r == 0) {
+        return scndNumberFloat;
+    }
+    else {
+        NSNumber *inputOne = [NSNumber numberWithFloat: scndNumberFloat];
+        NSNumber *inputTwo = [NSNumber numberWithFloat: r];
+        return [Fractions getGCFOf: inputOne and: inputTwo];
+    }
+}
+
+-(Fractions *)simplify {
+    NSNumber *gcf = [Fractions getGCFOf: self.numerator and:self.denominator];    //Get the gcf of the numerator and denominator of the fraction
+    
+    
+    float gcfFloat = gcf.floaValue;     //Convert GCF to float from NSNumber
+    
+    //Convert numerator and denominator to float from NSNumber
+    float numeratorFloat = self.numerator.floatValue;
+    float denominatorFloat = self.denominator.floatValue;
+    
+    //Divide numerator and denominator by gcf to simplify
+    numeratorFloat = numeratorFloat/gcfFloat;
+    denominatorFloat = denominatorFloat/gcfFloat;
+    
+    Fractions *simplifiedFraction = [Fractions newFractionFromFloat:numeratorFloat and:denominatorFloat];
+    
+    
+    
+}
+
++(Fractions *)newFractionFromFloat: (float)floatNumber and: (float)otherFloatNumber {
+    NSNumber *numerator = [NSNumber numberWithFloat: floatNumber];
+    NSNumber *denominator = [NSNumber numberWithFloat: otherFloatNumber];
+    
+    Fractions *newFraction = [Fractions newFractionWithNumerator: numerator andDenominator: denominator];
+    return newFraction;
+}
 @end
