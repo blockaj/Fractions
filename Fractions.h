@@ -19,6 +19,9 @@
 +(Fractions *)newFractionWithNumerator: (NSNumber *)numerator andDenominator: (NSNumber *)denominator;
 -(NSString *)fractionToString;
 +(Fractions *)multiply:(Fractions *)frstFraction by:(Fractions *)scndFraction;
-+(Fractions *)divide:(Fractions *)frstFraction by: (Fractions *)scndFraction; 
++(Fractions *)divide:(Fractions *)frstFraction by: (Fractions *)scndFraction;
++(NSNumber *)getGCFOf: (NSNumber *)frstNumber and: (NSNumber *)scndNumber;
+-(Fractions *)simplify;
++(Fractions *)newFractionWithFloat:(float)floatNumber and:(float)otherFloatNumber;
 
 @end
